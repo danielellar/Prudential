@@ -64,7 +64,7 @@ type TestClass () =
         let date1 = { CalendarRecord.Years = year1.Value; CalendarRecord.Months = month1.Value }
 
         let month2 = PrudentialMonth.create 7
-        let year2 = PrudentialYear.create 1
+        let year2 = PrudentialYear.create 1 
         let date2 = { CalendarRecord.Years = year2.Value; CalendarRecord.Months = month2.Value }
 
         let newDate = date1 + date2  
@@ -72,5 +72,23 @@ type TestClass () =
         Assert.AreEqual(102, PrudentialYear.value newDate.Years)
         Assert.AreEqual(1, PrudentialMonth.value newDate.Months)
 
+    [<TestMethod>]
+    member this.CanParseDates () = 
+        let date = new System.DateTime(1999, 12, 31)
+        let result = Prudential.Calendar.Date.create date
+        Assert.AreEqual(1999, PrudentialYear.value result.Years)
+        Assert.AreEqual(12, PrudentialMonth.value result.Months)
 
-    
+    [<TestMethod>]
+    member this.CanRoundDates () = 
+        let date = new System.DateTime(1999, 11, 30)
+        let result = Prudential.Calendar.Date.create date
+        Assert.AreEqual(1999, PrudentialYear.value result.Years)
+        Assert.AreEqual(12, PrudentialMonth.value result.Months)
+
+    [<TestMethod>]
+    member this.CanRoundDecemberDates () = 
+        let date = new System.DateTime(1999, 12, 31)
+        let result = Prudential.Calendar.Date.create date
+        Assert.AreEqual(1999, PrudentialYear.value result.Years)
+        Assert.AreEqual(12, PrudentialMonth.value result.Months)
