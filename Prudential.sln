@@ -3,11 +3,9 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 15
 VisualStudioVersion = 15.0.27130.2003
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{F2A71F9B-5D33-465A-A702-920D77279786}") = "Prudential", "Prudential\Prudential.fsproj", "{CBFBAB90-ADB7-4A97-AF1E-09F2029E7558}"
+Project("{6EC3EE1D-3C4E-46DD-8F32-0CC8E7565705}") = "Prudential", "Prudential\Prudential.fsproj", "{CBFBAB90-ADB7-4A97-AF1E-09F2029E7558}"
 EndProject
-Project("{F2A71F9B-5D33-465A-A702-920D77279786}") = "Prudential.Console", "Prudential.Console\Prudential.Console.fsproj", "{6E2EAAB0-2DBB-4ED1-9E7D-F2DA8BA35A2A}"
-EndProject
-Project("{F2A71F9B-5D33-465A-A702-920D77279786}") = "Prudential.Test", "Prudential.Test\Prudential.Test.fsproj", "{BE40E77D-704F-4146-8326-C3EFC4C38BF8}"
+Project("{6EC3EE1D-3C4E-46DD-8F32-0CC8E7565705}") = "Prudential.Test", "Prudential.Test\Prudential.Test.fsproj", "{BE40E77D-704F-4146-8326-C3EFC4C38BF8}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -19,10 +17,6 @@ Global
 		{CBFBAB90-ADB7-4A97-AF1E-09F2029E7558}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{CBFBAB90-ADB7-4A97-AF1E-09F2029E7558}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{CBFBAB90-ADB7-4A97-AF1E-09F2029E7558}.Release|Any CPU.Build.0 = Release|Any CPU
-		{6E2EAAB0-2DBB-4ED1-9E7D-F2DA8BA35A2A}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{6E2EAAB0-2DBB-4ED1-9E7D-F2DA8BA35A2A}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{6E2EAAB0-2DBB-4ED1-9E7D-F2DA8BA35A2A}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{6E2EAAB0-2DBB-4ED1-9E7D-F2DA8BA35A2A}.Release|Any CPU.Build.0 = Release|Any CPU
 		{BE40E77D-704F-4146-8326-C3EFC4C38BF8}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{BE40E77D-704F-4146-8326-C3EFC4C38BF8}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{BE40E77D-704F-4146-8326-C3EFC4C38BF8}.Release|Any CPU.ActiveCfg = Release|Any CPU
