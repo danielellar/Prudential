@@ -37,6 +37,16 @@ module Date =
             then { Years = resultYears.Value; Months = resultMonths.Value } 
             else raise (System.ArgumentException("Unable to add these two Dates"))
 
+        static member (-) (x : CalendarRecord, y : PrudentialMonth.Months) =
+            let months = PrudentialMonth.value x.Months - PrudentialMonth.value y
+            let isMonthsNegative = months < 0
+            let years = PrudentialYear.value x.Years - (if isMonthsNegative then 1 else 0)
+            let resultMonths = PrudentialMonth.create (months + (if isMonthsNegative then 12 else 0))
+            let resultYears = PrudentialYear.create years
+
+            if resultMonths.IsSome && resultYears.IsSome 
+            then { Years = resultYears.Value; Months = resultMonths.Value } 
+            else raise (System.ArgumentException("Unable to subtract these two Dates"))
 
     let inline (~+) (x : CalendarRecord, y : CalendarRecord) =
         let monthsSum = PrudentialMonth.value x.Months + PrudentialMonth.value y.Months
@@ -83,8 +93,7 @@ module Date =
         else raise (System.ArgumentException("Unable to add these two Dates"))
 
 open Date
-
- module OperatorsTest = 
+module OperatorsTest = 
 
     let inline (++) (x : CalendarRecord, y : PrudentialMonth.Months) =
         let monthsSum = PrudentialMonth.value x.Months + PrudentialMonth.value y
