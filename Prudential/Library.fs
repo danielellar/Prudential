@@ -84,7 +84,7 @@ module Date =
             if resultYears.IsNone then raise (System.ArgumentException("Value given for year is invalid"))
             { Years = resultYears.Value; Months = resultMonths.Value } 
     
-    let create date =
+    let parse date =
         let roundedDate = Round.month date
         let month = PrudentialMonth.create roundedDate.Month
         if month.IsNone then raise (System.ArgumentException("Value given for month is invalid"))                

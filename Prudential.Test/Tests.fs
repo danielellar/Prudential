@@ -75,20 +75,20 @@ type TestClass () =
     [<TestMethod>]
     member this.CanParseDates () = 
         let date = new System.DateTime(1999, 12, 31)
-        let result = Prudential.Calendar.Date.create date
+        let result = Prudential.Calendar.Date.parse date
         Assert.AreEqual(1999, PrudentialYear.value result.Years)
         Assert.AreEqual(12, PrudentialMonth.value result.Months)
 
     [<TestMethod>]
     member this.CanRoundDates () = 
         let date = new System.DateTime(1999, 11, 30)
-        let result = Prudential.Calendar.Date.create date
+        let result = Prudential.Calendar.Date.parse date
         Assert.AreEqual(1999, PrudentialYear.value result.Years)
         Assert.AreEqual(12, PrudentialMonth.value result.Months)
 
     [<TestMethod>]
     member this.CanRoundDecemberDates () = 
         let date = new System.DateTime(1999, 12, 31)
-        let result = Prudential.Calendar.Date.create date
+        let result = Prudential.Calendar.Date.parse date
         Assert.AreEqual(1999, PrudentialYear.value result.Years)
         Assert.AreEqual(12, PrudentialMonth.value result.Months)
