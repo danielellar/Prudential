@@ -13,8 +13,8 @@ type TestClass () =
         let month = PrudentialMonth.create 9
         let year = PrudentialYear.create 1980
         let date = { CalendarRecord.Years = year.Value; CalendarRecord.Months = month.Value }
-        Assert.AreEqual(PrudentialYear.value date.Years, 1980)
-        Assert.AreEqual(PrudentialMonth.value date.Months, 9)
+        Assert.AreEqual(1980, PrudentialYear.value date.Years)
+        Assert.AreEqual(9, PrudentialMonth.value date.Months)
 
     [<TestMethod>]
     member this.CanAddMonths () =
@@ -24,8 +24,8 @@ type TestClass () =
 
         let newDate = date + (PrudentialMonth.create 11).Value    
         
-        Assert.AreEqual(PrudentialYear.value newDate.Years, 1981)
-        Assert.AreEqual(PrudentialMonth.value newDate.Months, 8)
+        Assert.AreEqual(1981, PrudentialYear.value newDate.Years)
+        Assert.AreEqual(8, PrudentialMonth.value newDate.Months)
     
     [<TestMethod>]
     member this.CanSubtractMonths () = 
@@ -35,5 +35,42 @@ type TestClass () =
 
         let newDate = date - (PrudentialMonth.create 11).Value   
 
-        Assert.AreEqual(PrudentialYear.value newDate.Years, 1980)
-        Assert.AreEqual(PrudentialMonth.value newDate.Months, 9)
+        Assert.AreEqual(1980, PrudentialYear.value newDate.Years)
+        Assert.AreEqual(9, PrudentialMonth.value newDate.Months)
+        
+    [<TestMethod>]
+    member this.CanSubtractDates () = 
+        let month1 = PrudentialMonth.create 6
+        let year1 = PrudentialYear.create 100
+        let date1 = { CalendarRecord.Years = year1.Value; CalendarRecord.Months = month1.Value }
+
+        let month2 = PrudentialMonth.create 7
+        let year2 = PrudentialYear.create 1
+        let date2 = { CalendarRecord.Years = year2.Value; CalendarRecord.Months = month2.Value }
+
+        let newDate = date1 - date2  
+
+        Assert.AreEqual(98, PrudentialYear.value newDate.Years)
+        Assert.AreEqual(11, PrudentialMonth.value newDate.Months)
+        let x = new System.DateTime(100, 6, 1)
+        let y = x.AddYears(-1).AddMonths(-7)
+        Assert.AreEqual(98, y.Year)
+        Assert.AreEqual(11, y.Month)
+
+    [<TestMethod>]
+    member this.CanAddDates () = 
+        let month1 = PrudentialMonth.create 6
+        let year1 = PrudentialYear.create 100
+        let date1 = { CalendarRecord.Years = year1.Value; CalendarRecord.Months = month1.Value }
+
+        let month2 = PrudentialMonth.create 7
+        let year2 = PrudentialYear.create 1
+        let date2 = { CalendarRecord.Years = year2.Value; CalendarRecord.Months = month2.Value }
+
+        let newDate = date1 + date2  
+
+        Assert.AreEqual(102, PrudentialYear.value newDate.Years)
+        Assert.AreEqual(1, PrudentialMonth.value newDate.Months)
+
+
+    
