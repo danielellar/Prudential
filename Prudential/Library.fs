@@ -25,12 +25,23 @@ module PrudentialMonth =
     let value (Months e) = e
 
 module Date =
-    type CalendarRecord = { Years : PrudentialYear.Years; Months : PrudentialMonth.Months } 
+    type CalendarRecord = { Years : PrudentialYear.Years; Months : PrudentialMonth.Months } with
+        static member (+) (x : CalendarRecord, y : PrudentialMonth.Months) =
+            let monthsSum = PrudentialMonth.value x.Months + PrudentialMonth.value y
+            let months = monthsSum % 12
+            let years = PrudentialYear.value x.Years + (if monthsSum >= 12 then 1 else 0)
+            let resultMonths = PrudentialMonth.create months
+            let resultYears = PrudentialYear.create years
+
+            if resultMonths.IsSome && resultYears.IsSome 
+            then { Years = resultYears.Value; Months = resultMonths.Value } 
+            else raise (System.ArgumentException("Unable to add these two Dates"))
+
 
     let inline (~+) (x : CalendarRecord, y : CalendarRecord) =
         let monthsSum = PrudentialMonth.value x.Months + PrudentialMonth.value y.Months
         let months = monthsSum % 12
-        let years = PrudentialYear.value x.Years + PrudentialYear.value y.Years + (if months > 12 then 1 else 0)
+        let years = PrudentialYear.value x.Years + PrudentialYear.value y.Years + (if monthsSum >= 12 then 1 else 0)
         let resultMonths = PrudentialMonth.create months
         let resultYears = PrudentialYear.create years
 
@@ -63,7 +74,7 @@ module Date =
     let inline (++) (x : CalendarRecord, y : PrudentialMonth.Months) =
         let monthsSum = PrudentialMonth.value x.Months + PrudentialMonth.value y
         let months = monthsSum % 12
-        let years = PrudentialYear.value x.Years + (if months > 12 then 1 else 0)
+        let years = PrudentialYear.value x.Years + (if monthsSum >= 12 then 1 else 0)
         let resultMonths = PrudentialMonth.create months
         let resultYears = PrudentialYear.create years
 
@@ -71,4 +82,23 @@ module Date =
         then { Years = resultYears.Value; Months = resultMonths.Value } 
         else raise (System.ArgumentException("Unable to add these two Dates"))
 
-    
+open Date
+
+ module OperatorsTest = 
+
+    let inline (++) (x : CalendarRecord, y : PrudentialMonth.Months) =
+        let monthsSum = PrudentialMonth.value x.Months + PrudentialMonth.value y
+        let months = monthsSum % 12
+        let years = PrudentialYear.value x.Years + (if monthsSum >= 12 then 1 else 0)
+        let resultMonths = PrudentialMonth.create months
+        let resultYears = PrudentialYear.create years
+
+        if resultMonths.IsSome && resultYears.IsSome 
+        then { Years = resultYears.Value; Months = resultMonths.Value } 
+        else raise (System.ArgumentException("Unable to add these two Dates"))
+
+    let execute =
+        let month = PrudentialMonth.create 9
+        let year = PrudentialYear.create 1979
+        let date = { CalendarRecord.Years = year.Value; CalendarRecord.Months = month.Value }
+        printf "Years:'%i', Months:'%i'" (PrudentialYear.value date.Years) (PrudentialMonth.value date.Months)
